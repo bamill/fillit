@@ -6,7 +6,7 @@
 /*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/26 16:17:48 by azimina           #+#    #+#             */
-/*   Updated: 2017/01/02 13:59:25 by azimina          ###   ########.fr       */
+/*   Updated: 2017/01/02 18:45:21 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,8 @@ t_list  *ft_read(int fd)
 		else
 			return (NULL);
 	}
-	if ((new != NULL) && (((char *)ft_lstlastelem(new))[0]) == '\n')
+	if ((new != NULL) && (((((char *)ft_lstlastelem(new))[0]) == '\n')
+	 || (ft_lstlen(new) > 52)))
 		return (NULL);
 	else
 		return (ft_lstevenelem(&new));
