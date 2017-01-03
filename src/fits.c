@@ -3,5 +3,4 @@
 
 int	fits(char *piece, t_list *map)
 {
-  
 }
