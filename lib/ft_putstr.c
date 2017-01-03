@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fits.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:20:18 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:20:20 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/05 21:11:10 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/05 21:12:27 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-int	fits(char *piece, t_list *map)
+void	ft_putstr(char const *s)
 {
+	ft_putstr_fd(s, 1);
 }

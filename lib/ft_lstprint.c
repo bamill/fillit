@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fits.c                                             :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:20:18 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:20:20 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/13 20:46:11 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/29 18:06:58 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-int	fits(char *piece, t_list *map)
+void	ft_lstprint(t_list *lst)
 {
+	t_list	*current;
+
+	current = lst;
+	if (lst == NULL)
+		ft_putstr("error_reading\n");
+	while (current != NULL)
+	{
+		ft_putstr((char *)current->content);
+		current = current->next;
+	}
 }

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alphabeterizer.c                                   :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:19:55 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:27:50 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/01 10:12:41 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/13 19:39:04 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-void	alphabeterizer(t_list *pieces, size_t s, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int i;
+	const unsigned char	*csrc;
+	unsigned char		*cdst;
+	size_t				i;
 
+	csrc = src;
+	cdst = dst;
 	i = 0;
-	if (!pieces || !(pieces->content) || size == 0)
-		return ;
-	while (pieces->content[i])
+	while (i < n)
 	{
-		if (pieces->content[i] == '#')
-		pieces->content[i] = ('A' + n);
+		cdst[i] = csrc[i];
 		i++;
 	}
-	alphabeterizer(pieces->next, s - 1, n + 1);
+	return (void *)dst;
 }

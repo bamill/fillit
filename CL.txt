@@ -1,0 +1,7 @@
+Compilation long line:
+
+>gcc reading.c libfillit.h libft.h ft_lstprint.c ft_lstpush_back.c ft_putstr.c ft_putstr_fd.c ft_memcpy.c ft_lstnew.c ft_memalloc.c ft_memset.c ft_isascii.c ft_lstlastelem.c ft_lstevenelem.c ft_memdel.c ft_lsttotaldel.c -g
+
+Check for Valid/Invalid maps:
+
+>./a.out ./correct_maps/valid_4

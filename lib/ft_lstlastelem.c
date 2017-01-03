@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fits.c                                             :+:      :+:    :+:   */
+/*   ft_lstlastelem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:20:18 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:20:20 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/29 19:35:33 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/29 19:35:37 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-int	fits(char *piece, t_list *map)
+void		*ft_lstlastelem(t_list *lst)
 {
+	t_list	*current;
+
+	current = lst;
+	if (current != NULL)
+	{
+		while (current->next != NULL)
+			current = current->next;
+		return (current->content);
+	}
+	return (NULL);
 }

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solve.c                                            :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:20:41 by bmiller          ###   ########.fr       */
+/*   Created: 2016/11/28 19:17:46 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/01 09:56:31 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-int	solve(t_list *pieces, t_list *map)
+int	ft_isascii(int c)
 {
-	if (!pieces || !pieces->content)
+	if ((c >= 0) && (c <= 127))
 		return (1);
-	if (fits(pieces->content, map))
-		return (solve(ft_lst_butlast(ft_lst_rot(pieces, 1)), map));
-	else if (map->next)
-		return (solve(pieces, map->next));
-	level_map(map);
-	return (0);
+	else
+		return (0);
 }

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fits.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/02 17:20:18 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:20:20 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/05 18:41:18 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/05 18:52:31 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "fillit.h"
 
-int	fits(char *piece, t_list *map)
+void	*ft_memalloc(size_t size)
 {
+	void *memalloc;
+
+	if ((memalloc = (void *)malloc(size)))
+	{
+		ft_memset(memalloc, 0, size);
+		return (memalloc);
+	}
+	return (NULL);
 }
