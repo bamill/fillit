@@ -6,14 +6,14 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:18 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 20:48:12 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/02 21:51:26 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-int	fits(char *piece, t_list *map, size_t sq)
+int	fits(char *piece, char **map, size_t sq)
 {
 	
 }

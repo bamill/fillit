@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 20:30:52 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/03 17:03:19 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,51 @@ static int	solve(t_list *pieces, t_list *map, size_t sq)
 	return (0);
 }
 
-t_list		*solver(t_list *pieces, t_list *map, size_t sq)
+char		*solver(t_list **pieces)
 {
-	t_list	**pieces_p;
+	t_list	*pieces_p;
+	int		tetrominoses;
+	int		sq;
+	char	*map;
 
-	*pieces_p = pieces;
-	while (!solve(pieces, map, sq, 0))
+	pieces_p = *pieces;
+	tetrominoses = ft_lstlen(pieces_p);
+	sq = ft_nearest_sqr(tetrominoses * 4);
+	map = create_map(NULL, sq);
+	while (!solve(pieces_p, map, sq, 0))
 	{
-		level_map(map, sq);
+		map = create_map(map, sq);
 		sq++;
 	}
 	ft_lstdel(pieces_p, &ft_bzero);
 	return (map);
+}
+
+char		*create_map(char *oldmap, int width)
+{
+	int		i;
+	int		length;
+	char	*map;
+	char	firstrow[width + 2];
+
+	i = 0;
+	length = width * (1 + width);
+	if (oldmap != NULL)
+	{
+		free(oldmap);
+		oldmap = NULL;
+	}
+	if ((map = (char *)malloc(sizeof(char) * (length + 1))))
+	{
+		ft_memset(firstrow, '.', width);
+		firstrow[width] = '\n';
+		firstrow[width + 1] = '\0';
+		while (i < width)
+		{
+			ft_strcat(map, firstrow);
+			i++;
+		}
+		return (map);
+	}
+	return (NULL);
 }

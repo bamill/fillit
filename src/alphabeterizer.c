@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:19:55 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/02 17:27:50 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/03 17:28:24 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	alphabeterizer(t_list *pieces, size_t s, size_t n)
 	int i;
 
 	i = 0;
-	if (!pieces || !(pieces->content) || size == 0)
+	if (!pieces || !(pieces->content) || s == 0)
 		return ;
-	while (pieces->content[i])
+	while (((char *)pieces->content)[i])
 	{
-		if (pieces->content[i] == '#')
-		pieces->content[i] = ('A' + n);
+		if (((char *)pieces->content)[i] == '#')
+		((char*)pieces->content)[i] = ('A' + n);
 		i++;
 	}
 	alphabeterizer(pieces->next, s - 1, n + 1);

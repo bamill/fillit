@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstevenelem.c                                   :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/29 22:44:29 by azimina           #+#    #+#             */
-/*   Updated: 2017/01/03 13:05:24 by azimina          ###   ########.fr       */
+/*   Created: 2016/12/13 20:38:24 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/13 21:36:36 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstevenelem(t_list **lst)
+int	ft_lstlen(t_list *lst)
 {
+	int		count;
 	t_list	*current;
-	t_list	*new;
-	t_list	*next;
 
-	current = *lst;
-	if ((current != NULL) && (new = ft_lstnew(current->content,
-					current->content_size)))
+	count = 0;
+	current = lst;
+	while (current != NULL)
 	{
-		current = current->next->next;
-		while (current != NULL)
-		{
-			ft_lstpush_back(&new, current->content, current->content_size);
-			current = current->next->next;
-		}
-		ft_lsttotaldel(lst);
-		return (new);
+		count++;
+		current = current->next;
 	}
-	return (NULL);
+	return (count);
 }

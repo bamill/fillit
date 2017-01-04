@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstevenelem.c                                   :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/29 22:44:29 by azimina           #+#    #+#             */
-/*   Updated: 2017/01/03 13:05:24 by azimina          ###   ########.fr       */
+/*   Created: 2016/12/01 14:54:28 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/13 19:52:02 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstevenelem(t_list **lst)
+char	*ft_strcat(char *dst, const char *src)
 {
-	t_list	*current;
-	t_list	*new;
-	t_list	*next;
+	char	*b;
+	size_t	i;
 
-	current = *lst;
-	if ((current != NULL) && (new = ft_lstnew(current->content,
-					current->content_size)))
+	b = dst;
+	i = 0;
+	while (b[i] != '\0')
+		i++;
+	while (*src)
 	{
-		current = current->next->next;
-		while (current != NULL)
-		{
-			ft_lstpush_back(&new, current->content, current->content_size);
-			current = current->next->next;
-		}
-		ft_lsttotaldel(lst);
-		return (new);
+		b[i] = *src++;
+		i++;
 	}
-	return (NULL);
+	b[i] = '\0';
+	return (dst);
 }
