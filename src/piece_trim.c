@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:28:28 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/03 18:02:28 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/04 16:35:22 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static char				**trim(char ***piece, int x, int y)
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (i <= y)
+	while (i < y)
 	{
 		result[i] = (char*)(malloc(x + 1));
 		ft_memcpy(result[i], ft_strtrim((*piece)[i]), x + 1);
