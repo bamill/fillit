@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:28:28 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/04 16:35:22 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/06 17:19:21 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int				trim_mark_rows(char ***piece, int x, int y, char c)
 				i++;
 			}
 			blank_rows++;
-			num_blanks = 0;
 		}
+		num_blanks = 0;
 		i = 0;
 		j++;
 	}
@@ -64,21 +64,21 @@ static int				trim_mark_cols(char ***piece, int x, int y, char c)
 	{
 		while (j < y)
 		{
-			if ((*piece)[j][i] == c)
+			if ((*piece)[j][i] == c || (*piece)[j][i] == ' ')
 				num_blanks++;
 			j++;
 		}
 		j = 0;
-		if (num_blanks == x)
+		if (num_blanks == y)
 		{
 			while (j < y)
 			{
 				(*piece)[j][i] = ' ';
-				i++;
+				j++;
 			}
 			blank_cols++;
-			num_blanks = 0;
 		}
+		num_blanks = 0;
 		j = 0;
 		i++;
 	}
@@ -89,20 +89,26 @@ static char				**trim(char ***piece, int x, int y)
 {
 	char	**result;
 	int		i;
+	int		j;
 
 	result = (char**)(malloc(sizeof(char*) * y + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
+	j = 0;
 	while (i < y)
 	{
+		if (ft_strlen(ft_strtrim((*piece)[j])) == 0)
+			j++;
 		result[i] = (char*)(malloc(x + 1));
-		ft_memcpy(result[i], ft_strtrim((*piece)[i]), x + 1);
+		ft_memcpy(result[i], ft_strtrim((*piece)[j]), x + 1);
+		i++;
+		j++;
 	}
 	return (result);
 }
 
-char					**piece_trim(char **piece)
+static char				**piece_trim(char **piece)
 {
 	char	***this_piece;
 	char	**result;
@@ -111,10 +117,20 @@ char					**piece_trim(char **piece)
 
 	x = 4;
 	y = 4;
+	this_piece = (char***)(malloc(sizeof(char**)));
 	*this_piece = piece;
-	x -= trim_mark_rows(this_piece, x, y, '.');
-	y -= trim_mark_cols(this_piece, x, y, '.');
+	y -= trim_mark_rows(this_piece, 4, 4, '.');
+	x -= trim_mark_cols(this_piece, 4, 4, '.');
 	result = trim(this_piece, x, y);
 	free(this_piece);
 	return (result);
+}
+
+t_list					*piece_trim_lst(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	lst->content = piece_trim(lst->content);
+	lst->content_size = sizeof(lst->content);
+	return (lst);
 }

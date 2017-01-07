@@ -6,25 +6,11 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:57:48 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/03 15:01:46 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/06 15:20:17 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char			**bisquick(char *in_str, size_t x_dim, size_t y_dim)
-{
-	int		i;
-	char	**arr;
-
-	i = 0;
-	arr = (char**)(malloc(sizeof(char*) * y_dim + 1));
-	while (i <= (int)y_dim)
-	{
-		arr[i] = (char*)(malloc((x_dim + 1)));
-		i++;
-	}
-	bisquick_pop(&arr, in_str);
-	return (arr);
-}
+#include <stdlib.h>
 
 static void		bisquick_pop(char ***arr, char *in_str)
 {
@@ -50,4 +36,20 @@ static void		bisquick_pop(char ***arr, char *in_str)
 		}
 		i++;
 	}
+}
+
+char			**bisquick(char *in_str, size_t x_dim, size_t y_dim)
+{
+	int		i;
+	char	**arr;
+
+	i = 0;
+	arr = (char**)(malloc(sizeof(char*) * y_dim + 1));
+	while (i <= (int)y_dim)
+	{
+		arr[i] = (char*)(malloc((x_dim + 1)));
+		i++;
+	}
+	bisquick_pop(&arr, in_str);
+	return (arr);
 }

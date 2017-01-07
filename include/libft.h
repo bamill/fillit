@@ -6,7 +6,7 @@
 /*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 14:11:40 by azimina           #+#    #+#             */
-/*   Updated: 2016/12/29 23:35:38 by azimina          ###   ########.fr       */
+/*   Updated: 2017/01/06 20:31:36 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,6 @@ void				*ft_lstindex(t_list *lst, int index);
 void				*ft_lstlastelem(t_list *lst);
 t_list				*ft_lstevenelem(t_list **lst);
 void				ft_lsttotaldel(t_list **lst);
+t_list				*ft_lstcpy(t_list *lst);
+
 #endif

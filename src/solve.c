@@ -6,17 +6,16 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/04 16:26:58 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/06 21:01:57 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-static int	solve(t_list *pieces, char **map, size_t sq)
+static int		solve(t_list *pieces, char **map, size_t sq)
 {
 	size_t	i;
-	t_list	**pieces_p;
 
 	if (!pieces || !pieces->content)
 		return (1);
@@ -36,46 +35,48 @@ static int	solve(t_list *pieces, char **map, size_t sq)
 	return (0);
 }
 
-char		**solver(t_list **pieces)
-{
-	t_list	*pieces_p;
-	int		tetrominoses;
-	int		sq;
-	char	**map;
-
-	pieces_p = *pieces;
-	tetrominoses = ft_lstlen(pieces_p);
-	sq = ft_nearest_sqr(tetrominoses * 4);
-	map = create_map(NULL, sq);
-	while (!solve(pieces_p, map, sq, 0))
-	{
-		sq++;
-		map = create_map(map, sq);
-	}
-	ft_lstdel(pieces_p, &ft_bzero);
-	return (map);
-}
-
-char		**create_map(char **oldmap, int sq)
+static char		**create_map(char **oldmap, int sq)
 {
 	int		i;
 	char	**map;
 
 	i = 0;
-	length = width * (1 + width);
 	if (oldmap != NULL)
-		ft_memdel(oldmap);
+		ft_memdel((void**)oldmap);
 	if ((map = (char**)malloc(sizeof(char*) * sq + 1)))
 	{
 		while (i < sq)
 		{
 			if ((map[i] = (char*)malloc(sq + 1)))
 				ft_memset(map[i], '.', sq);
-			i++;
 			else
 				return (NULL);
+			i++;			
 		}
 		return (map);
 	}
 	return (NULL);
+}
+
+char			**solver(t_list **pieces)
+{
+	t_list	*piecey;
+	int		tetrominoses;
+	int		sq;
+	char	**map;
+
+	piecey = *pieces;
+	tetrominoses = ft_lstlen(piecey);
+	sq = ft_nearest_sqr(tetrominoses * 4);
+	alphabeterizer(piecey, tetrominoses, 0);
+	piecey = ft_lstmap(ft_lstmap(piecey, &ft_stomultistr), &piece_trim_lst);
+	map = create_map(NULL, sq);
+	while (!solve(piecey, map, sq))
+	{
+		sq++;
+		map = create_map(map, sq);
+	}
+	ft_lstdel(&piecey, &ft_bzero);
+//	ft_lstdel(pieces, &ft_bzero);
+	return (map);
 }
