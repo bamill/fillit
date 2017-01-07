@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   piece_y.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/06 19:09:56 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 22:53:38 by bmiller          ###   ########.fr       */
+/*   Created: 2016/11/28 14:17:01 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/05 18:55:53 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	piece_y(char **piece)
+size_t		ft_strlen(const char *s)
 {
-	int	y;
+	size_t len;
 
-	y = 0;
-	while (piece[y])
-		y++;
-	return (y);
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }

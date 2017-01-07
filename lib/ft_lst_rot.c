@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 19:24:07 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 20:27:30 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/07 00:57:26 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*ft_lst_rot(t_list *lst, int i)
 	if (!lst)
 		return (NULL);
 	if (i == 0)
-	return (lst);
+		return (lst);
 	list = ft_lstnew(lst->content, lst->content_size);
 	l = ft_lstcpy(lst->next);
 	ft_lstadd(&l, list);

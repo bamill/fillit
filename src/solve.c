@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 21:01:57 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/07 00:56:13 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ static int		solve(t_list *pieces, char **map, size_t sq)
 		if (fits(pieces->content, map))
 		{
 			place(pieces->content, map);
+//			print_map(map);
 			if (solve(pieces->next, map, sq))
 				return (1);
 			unplace(pieces->content, map);
 		}
 		i--;
+		ft_super_lstprint(pieces, &print_map);
 		pieces = ft_lst_rot(pieces, 1);
+		ft_super_lstprint(pieces, &print_map);
 	}
 	return (0);
 }
@@ -69,13 +72,15 @@ char			**solver(t_list **pieces)
 	tetrominoses = ft_lstlen(piecey);
 	sq = ft_nearest_sqr(tetrominoses * 4);
 	alphabeterizer(piecey, tetrominoses, 0);
+	ft_lstprint(piecey);
 	piecey = ft_lstmap(ft_lstmap(piecey, &ft_stomultistr), &piece_trim_lst);
+	ft_super_lstprint(piecey, &print_map);
 	map = create_map(NULL, sq);
 	while (!solve(piecey, map, sq))
 	{
 		sq++;
 		map = create_map(map, sq);
-	}
+	} 
 	ft_lstdel(&piecey, &ft_bzero);
 //	ft_lstdel(pieces, &ft_bzero);
 	return (map);

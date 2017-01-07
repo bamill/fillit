@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:25:44 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 20:56:28 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/07 00:56:00 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int						ft_nearest_sqr(int nb);
 t_list					*ft_stomultistr(t_list *lst);
 t_list					*ft_lst_rot(t_list *lst, int i);
 int						verif(char *str);
-int						piece_y(char **piece);
+size_t					piece_y(char **piece);
+void					ft_super_lstprint(t_list *lst, void (*f)(char**));
+int						fitter(char **piece, char **map, size_t *p);
 
 #endif

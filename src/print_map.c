@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 21:27:53 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/07 01:00:20 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_map(char **map)
 	int	i;
 
 	i = 0;
-	while (*(map + i))
+	while (map + i)
 	{
 		ft_putstr(*(map + i));
 		ft_putstr("\n");

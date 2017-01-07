@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:28:28 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 17:19:21 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/07 00:54:26 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,14 @@ static char				**trim(char ***piece, int x, int y)
 	j = 0;
 	while (i < y)
 	{
-		if (ft_strlen(ft_strtrim((*piece)[j])) == 0)
+		while (ft_strlen(ft_strtrim((*piece)[j])) == 0)
 			j++;
 		result[i] = (char*)(malloc(x + 1));
 		ft_memcpy(result[i], ft_strtrim((*piece)[j]), x + 1);
 		i++;
 		j++;
 	}
+	result[i] = NULL;
 	return (result);
 }
 
@@ -122,7 +123,7 @@ static char				**piece_trim(char **piece)
 	y -= trim_mark_rows(this_piece, 4, 4, '.');
 	x -= trim_mark_cols(this_piece, 4, 4, '.');
 	result = trim(this_piece, x, y);
-	free(this_piece);
+	ft_memdel((void*)(*this_piece));
 	return (result);
 }
 
