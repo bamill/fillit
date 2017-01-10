@@ -6,7 +6,7 @@
 /*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/26 16:17:48 by azimina           #+#    #+#             */
-/*   Updated: 2017/01/06 15:46:14 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/09 20:45:58 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ t_list		*ft_read(int fd)
 		return (ft_lstevenelem(&new));
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	int 	fd;
-	t_list 	*lst;
+	int		fd;
+	t_list	*lst;
 	char	**map;
 
 	if (ac == 2)
@@ -59,12 +59,19 @@ int		main(int ac, char **av)
 		if ((fd = open(av[1], O_RDONLY)))
 		{
 			lst = ft_read(fd);
+			if (lst == NULL)
+			{
+				ft_putstr("error\n");
+				return (0);
+			}
 			map = solver(&lst);
 			print_map(map);
 		}
+		if (close(fd) == -1)
+			return (0);
 	}
 	else if (ac == 1)
-		ft_putstr("usage ...");
+		ft_putstr("Usage: ./fillit source_file\n");
 	else
 		ft_putstr("error\n");
 	return (0);

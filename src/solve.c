@@ -6,35 +6,39 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/07 00:56:13 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/09 22:04:10 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-static int		solve(t_list *pieces, char **map, size_t sq)
+static int		solve(t_list *pieces, char **map, int x, int y)
 {
-	size_t	i;
+	int		max_x;
+	int		max_y;
 
 	if (!pieces || !pieces->content)
 		return (1);
-	i = ft_lstlen(pieces);
-	while (i > 0)
-	{
-		if (fits(pieces->content, map))
+	max_x = ft_strlen(map[0]) - ft_strlen(((char**)pieces->content)[0]);
+	max_y = (int)ft_strlen(map[0]) - piece_y(pieces->content);
+	if ((int)piece_y(pieces->content) <= (int)ft_strlen(map[0]))
+		while (y <= max_y)
 		{
-			place(pieces->content, map);
-//			print_map(map);
-			if (solve(pieces->next, map, sq))
-				return (1);
-			unplace(pieces->content, map);
+			while (x <= max_x)
+			{
+				if (fitter(pieces->content, map, x, y))
+				{
+					place(pieces->content, map, x, y);
+					if (solve(pieces->next, map, 0, 0))
+						return (1);
+					unplace(pieces->content, map);
+				}
+				x++;
+			}
+			x = 0;
+			y++;
 		}
-		i--;
-		ft_super_lstprint(pieces, &print_map);
-		pieces = ft_lst_rot(pieces, 1);
-		ft_super_lstprint(pieces, &print_map);
-	}
 	return (0);
 }
 
@@ -51,10 +55,13 @@ static char		**create_map(char **oldmap, int sq)
 		while (i < sq)
 		{
 			if ((map[i] = (char*)malloc(sq + 1)))
+			{
 				ft_memset(map[i], '.', sq);
+				map[i][sq] = 0;
+			}
 			else
 				return (NULL);
-			i++;			
+			i++;
 		}
 		return (map);
 	}
@@ -72,16 +79,13 @@ char			**solver(t_list **pieces)
 	tetrominoses = ft_lstlen(piecey);
 	sq = ft_nearest_sqr(tetrominoses * 4);
 	alphabeterizer(piecey, tetrominoses, 0);
-	ft_lstprint(piecey);
 	piecey = ft_lstmap(ft_lstmap(piecey, &ft_stomultistr), &piece_trim_lst);
-	ft_super_lstprint(piecey, &print_map);
 	map = create_map(NULL, sq);
-	while (!solve(piecey, map, sq))
+	while (!solve(piecey, map, 0, 0))
 	{
 		sq++;
 		map = create_map(map, sq);
-	} 
+	}
 	ft_lstdel(&piecey, &ft_bzero);
-//	ft_lstdel(pieces, &ft_bzero);
 	return (map);
 }

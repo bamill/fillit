@@ -6,11 +6,12 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:28:28 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/07 00:54:26 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/09 22:47:54 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "fillit.h"
 #include <stdlib.h>
 
 static int				trim_mark_rows(char ***piece, int x, int y, char c)
@@ -32,16 +33,7 @@ static int				trim_mark_rows(char ***piece, int x, int y, char c)
 				num_blanks++;
 			i++;
 		}
-		i = 0;
-		if (num_blanks == x)
-		{
-			while (i < x)
-			{
-				(*piece)[j][i] = ' ';
-				i++;
-			}
-			blank_rows++;
-		}
+		blank_rows += blank_x(j, x, num_blanks, piece);
 		num_blanks = 0;
 		i = 0;
 		j++;
@@ -68,16 +60,7 @@ static int				trim_mark_cols(char ***piece, int x, int y, char c)
 				num_blanks++;
 			j++;
 		}
-		j = 0;
-		if (num_blanks == y)
-		{
-			while (j < y)
-			{
-				(*piece)[j][i] = ' ';
-				j++;
-			}
-			blank_cols++;
-		}
+		blank_cols += blank_y(i, y, num_blanks, piece);
 		num_blanks = 0;
 		j = 0;
 		i++;
