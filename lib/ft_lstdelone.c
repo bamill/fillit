@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/13 13:04:03 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/13 13:05:16 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
 #include "libft.h"
 
-void	print_map(char **map)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
-	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
-	}
-	return ;
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
 }

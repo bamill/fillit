@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/05 19:01:04 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/05 20:55:30 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
 #include "libft.h"
 
-void	print_map(char **map)
+void	ft_putchar(char c)
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
-	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
-	}
-	return ;
+	ft_putchar_fd(c, 1);
 }

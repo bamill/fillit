@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/02 23:35:13 by bmiller           #+#    #+#             */
+/*   Updated: 2016/12/03 21:50:43 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
 #include "libft.h"
+#include <stdlib.h>
 
-void	print_map(char **map)
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
+	t_list	*list;
+
+	if (!lst)
+		return (NULL);
+	else
 	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
+		list = f(lst);
+		list->next = ft_lstmap(lst->next, f);
+		return (list);
 	}
-	return ;
 }

@@ -6,34 +6,41 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 17:20:40 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/07 00:56:13 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/09 20:07:15 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
 
-static int		solve(t_list *pieces, char **map, size_t sq)
+static int		solve(t_list *pieces, char **map, int x, int y)
 {
-	size_t	i;
+	int	    map_size;
+	int		max_x;
+	int		max_y;
 
 	if (!pieces || !pieces->content)
 		return (1);
-	i = ft_lstlen(pieces);
-	while (i > 0)
+	map_size = (int)ft_strlen(map[0]);
+	max_x = map_size - (int)ft_strlen(((char**)pieces->content)[0]);
+	max_y = map_size - piece_y(pieces->content);
+	if ((int)piece_y(pieces->content) > map_size)
+		return (0);
+	while (y <= max_y)
 	{
-		if (fits(pieces->content, map))
+		while (x <= max_x)
 		{
-			place(pieces->content, map);
-//			print_map(map);
-			if (solve(pieces->next, map, sq))
-				return (1);
-			unplace(pieces->content, map);
+			if (fitter(pieces->content, map, x, y))
+			{
+				place(pieces->content, map, x, y);
+				if (solve(pieces->next, map, 0, 0))
+					return (1);
+				unplace(pieces->content, map);
+			}
+			x++;
 		}
-		i--;
-		ft_super_lstprint(pieces, &print_map);
-		pieces = ft_lst_rot(pieces, 1);
-		ft_super_lstprint(pieces, &print_map);
+		x = 0;
+		y++;
 	}
 	return (0);
 }
@@ -51,7 +58,10 @@ static char		**create_map(char **oldmap, int sq)
 		while (i < sq)
 		{
 			if ((map[i] = (char*)malloc(sq + 1)))
+			{
 				ft_memset(map[i], '.', sq);
+				map[i][sq] = 0;
+			}
 			else
 				return (NULL);
 			i++;			
@@ -67,6 +77,7 @@ char			**solver(t_list **pieces)
 	int		tetrominoses;
 	int		sq;
 	char	**map;
+	int	l;
 
 	piecey = *pieces;
 	tetrominoses = ft_lstlen(piecey);
@@ -74,14 +85,14 @@ char			**solver(t_list **pieces)
 	alphabeterizer(piecey, tetrominoses, 0);
 	ft_lstprint(piecey);
 	piecey = ft_lstmap(ft_lstmap(piecey, &ft_stomultistr), &piece_trim_lst);
-	ft_super_lstprint(piecey, &print_map);
+	l = ft_lstlen(piecey);
 	map = create_map(NULL, sq);
-	while (!solve(piecey, map, sq))
+	ft_putstr("\n-----SOLUTION----\n\n");
+	while (!solve(piecey, map, 0, 0))
 	{
 		sq++;
 		map = create_map(map, sq);
 	} 
 	ft_lstdel(&piecey, &ft_bzero);
-//	ft_lstdel(pieces, &ft_bzero);
 	return (map);
 }

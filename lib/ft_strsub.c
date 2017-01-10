@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/11/29 19:35:08 by bmiller           #+#    #+#             */
+/*   Updated: 2016/12/03 21:57:51 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft.h"
+#include <stdlib.h>
 
-void	print_map(char **map)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
+	char	*st;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	st = (char*)(malloc(len + 1));
+	if (!st)
+		return (NULL);
 	i = 0;
-	while (i < j)
+	len += (size_t)start;
+	while (start < (unsigned int)len)
 	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
+		*(st + i) = *(s + start);
+		start++;
 		i++;
 	}
-	return ;
+	*(st + i) = '\0';
+	return (st);
 }

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_lstlastelem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: azimina <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/12/29 19:35:33 by azimina           #+#    #+#             */
+/*   Updated: 2016/12/29 19:35:37 by azimina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
 #include "libft.h"
 
-void	print_map(char **map)
+void		*ft_lstlastelem(t_list *lst)
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
+	t_list	*current;
+
+	current = lst;
+	if (current != NULL)
 	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
+		while (current->next != NULL)
+			current = current->next;
+		return (current->content);
 	}
-	return ;
+	return (NULL);
 }

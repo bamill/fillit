@@ -6,7 +6,7 @@
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 22:03:21 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/06 23:29:35 by bmiller          ###   ########.fr       */
+/*   Updated: 2017/01/09 18:49:52 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 #include "fillit.h"
 #include <stdlib.h>
 
-static void		placement(char **piece, char **map, size_t *p)
+static int			fitters(char **piece, char **map, size_t x, size_t y)
+{
+	size_t		p_x;
+	size_t		p_y;
+
+	p_x = (size_t)ft_strlen(piece[0]);
+	p_y = piece_y(piece);
+	while (p_y > 0)
+	{
+		while (p_x > 0)
+		{
+			if (piece[p_y - 1][p_x - 1] != '.'\
+				&& map[(y + p_y) - 1][(x + p_x) - 1] != '.')
+				return (0);
+			p_x--;
+		}
+		p_x = (size_t)ft_strlen(piece[0]);
+		p_y--;
+	}
+	return (1);
+}
+
+static void		placement(char **piece, char **map, size_t x, size_t y)
 {
 	size_t	p_x;
 	size_t	p_y;
@@ -26,7 +48,7 @@ static void		placement(char **piece, char **map, size_t *p)
 		while (p_x > 0)
 		{
 			if (piece[p_y - 1][p_x - 1] != '.')
-				map[(p[1] + p_y) - 1][(p[0] + p_x) - 1] = piece[p_y - 1][p_x - 1];
+				map[(y + p_y) - 1][(x + p_x) - 1] = piece[p_y - 1][p_x - 1];
 			p_x--;
 		}
 		p_x = (size_t)ft_strlen(piece[0]);
@@ -35,41 +57,31 @@ static void		placement(char **piece, char **map, size_t *p)
 	return ;
 }
 
-void			place(char **piece, char **map)
+void			place(char **piece, char **map, size_t x, size_t y)
 {
 	size_t	map_root;
 	size_t	p_x;
 	size_t	p_y;
-	size_t	*p;
 
 	if (!map || !piece)
 		return ;
 	map_root = (size_t)ft_strlen(map[0]);
 	p_x = (size_t)ft_strlen(piece[0]);
 	p_y = piece_y(piece);
-	if ((p = (size_t*)(malloc(sizeof(size_t) * 2))))
+	while (y <= (map_root - p_y))
 	{
-		p[0] = 0;
-		p[1] = 0;
-	}
-	else
-		return ;
-	while (p[1] <= (map_root - p_y))
-	{
-		while (p[0] <= (map_root - p_x))
+		while (x <= (map_root - p_x))
 		{
-			if (map[p[1]][p[0]] == '.' || piece[0][0] == '.')
-				if (fitter(piece, map, p))
+			if (map[y][x] == '.' || piece[0][0] == '.')
+				if (fitters(piece, map, x, y))
 				{
-					placement(piece, map, p);
-					ft_memdel((void**)&p);
+					placement(piece, map, x, y);
 					return ;
 				}
-			p[0]++;
+			x++;
 		}
-		p[0] = 0;
-		p[1]++;
+		x = 0;
+		y++;
 	}
-	ft_memdel((void**)&p);
 	return ;
 }

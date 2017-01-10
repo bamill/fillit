@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2016/11/29 19:57:59 by bmiller           #+#    #+#             */
+/*   Updated: 2016/12/04 15:32:55 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include <string.h>
 #include "libft.h"
 
-void	print_map(char **map)
+static int	is_ws(char c)
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
-	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
-	}
-	return ;
+	if (c == ' ' || c == '\n' || c == '\t')
+		return (1);
+	return (0);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	if (!s)
+		return (NULL);
+	if (!(*s))
+		return (ft_strsub(s, 0, 0));
+	if (is_ws(*s))
+		return (ft_strtrim(s + 1));
+	if (is_ws(*(s + (ft_strlen(s)) - 1)))
+		return (ft_strtrim((char const*)ft_strsub(s, 0, ft_strlen(s) - 1)));
+	return (ft_strsub(s, 0, ft_strlen(s)));
 }

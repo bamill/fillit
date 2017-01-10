@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_stomultistr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmiller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/05 15:17:34 by bmiller           #+#    #+#             */
-/*   Updated: 2017/01/09 18:30:19 by bmiller          ###   ########.fr       */
+/*   Created: 2017/01/06 20:14:11 by bmiller           #+#    #+#             */
+/*   Updated: 2017/01/07 00:11:36 by bmiller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft.h"
 
-void	print_map(char **map)
+#include "libft.h"
+#include "fillit.h"
+#include <stdlib.h>
+
+t_list	*ft_stomultistr(t_list *lst)
 {
-	int	i;
-	int j;
-	
-	j = piece_y(map);
-	i = 0;
-	while (i < j)
-	{
-		ft_putstr(*(map + i));
-		ft_putstr("\n");
-		i++;
-	}
-	return ;
+	char** temp;
+	char** p;
+	size_t size;
+
+	temp = ft_strsplit(lst->content, '\n');
+	p = piece_trim(temp);
+	size = \
+		(ft_strlen(p[0]) + 1) * piece_y(p);
+	ft_memdel((void**)temp);
+	ft_memdel(&(lst->content));
+	lst->content = (void *)p;
+	lst->content_size = size;
+	return (lst);
 }

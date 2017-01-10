@@ -30,7 +30,7 @@ static char		piece_char(char **piece)
 	return (-1);
 }
 
-void	unplace(char **piece, char **map)
+/*void	unplace(char **piece, char **map)
 {
 	size_t	map_root;
 	size_t	p_x;
@@ -62,5 +62,32 @@ void	unplace(char **piece, char **map)
 		p[1]++;
 	}
 	ft_memdel((void**)&p);
+	return ;
+}
+*/
+
+void unplace(char **piece, char **map)
+{
+	int	i;
+	int	j;
+	int	map_root;
+	char	p_al;
+
+	if (!map || !piece)
+		return ;
+	i = 0;
+	j = 0;
+	map_root = ft_strlen(map[0]);
+	p_al = piece_char(piece);
+	while (j < map_root)
+	{
+		while (i < map_root)
+		{
+			map[j][i] = map[j][i] == p_al ? '.' : map[j][i];
+			i++;
+		}
+		i = 0;
+		j++;
+	}
 	return ;
 }
